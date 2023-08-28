@@ -12,8 +12,14 @@ const displayPhones = (phones) => {
   // step 1: container id
   const phoneContainer = document.getElementById("phone-container");
   //clear phone container cards before adding new cards
-  phoneContainer.textContent = '';
-
+  phoneContainer.textContent = "";
+  const showAllContainer = document.getElementById("show-all-container");
+  if (phones.length > 12) {
+    showAllContainer.classList.remove("hidden");
+  } else {
+    showAllContainer.classList.add("hidden");
+  }
+  phones = phones.slice(0, 12);
   //console.log(phones);
   //for each marbo karon pottek ta ui te marbo
   phones.forEach((phone) => {
@@ -39,18 +45,23 @@ const displayPhones = (phones) => {
     //   step 4 : Append Child
     phoneContainer.appendChild(phoneCard);
   });
-
-  
 };
 
 // Handle Search Button
 
-const handleSearch = () =>{
-    //console.log('okay')
-    const searchField = document.getElementById("search-field");
-    const searchText = searchField.value;
-    //console.log(searchText);
-    loadPhone(searchText);
-}
+const handleSearch = () => {
+  //console.log('okay')
+  const searchField = document.getElementById("search-field");
+  const searchText = searchField.value;
+  //console.log(searchText);
+  loadPhone(searchText);
+};
+
+const handleSearch2 = () => {
+  const searchField = document.getElementById("search-field2");
+  const searchText = searchField.value;
+  //console.log(searchText);
+  loadPhone(searchText);
+};
 
 //loadPhone();
