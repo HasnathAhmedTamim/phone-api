@@ -3,8 +3,9 @@ const loadPhone = async (searchText = "13", isShowAll) => {
     `https://openapi.programming-hero.com/api/phones?search=${searchText}`
   );
   const data = await res.json();
+  console.log(data);
   const phones = data.data;
-  // console.log(phones);
+
   displayPhones(phones, isShowAll);
 };
 
@@ -40,8 +41,8 @@ const displayPhones = (phones, isShowAll) => {
               />
             </figure>
             <div class="card-body">
-              <h2 class="card-title">${phone.phone_name}</h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <h2 class="card-title justify-center">${phone.phone_name}</h2>
+              <p></p>
               <div class="card-actions justify-center">
                 <button onclick="handleShowDetails('${phone.slug}')" class="btn btn-primary">Show Details</button>
               </div>
@@ -79,7 +80,7 @@ const showPhoneDetails = (phone) => {
   <p><span>chipSet: ${phone?.mainFeatures?.chipSet}</span></p>
   <p><span>memory: ${phone?.mainFeatures?.memory}</span></p>
   <p><span>releaseDate: ${phone?.releaseDate}</span></p>
-  <p><span>GPS: ${phone?.others?.GPS}</span></p>
+  <p><span>GPS: ${phone?.others?.GPS|| 'NO GPS'}</span></p>
   `;
   show_details_modal.showModal();
 };
