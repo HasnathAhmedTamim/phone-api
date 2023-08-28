@@ -1,4 +1,4 @@
-const loadPhone = async (searchText, isShowAll) => {
+const loadPhone = async (searchText = "13", isShowAll) => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/phones?search=${searchText}`
   );
@@ -19,12 +19,11 @@ const displayPhones = (phones, isShowAll) => {
   } else {
     showAllContainer.classList.add("hidden");
   }
-  if(!isShowAll){
+  if (!isShowAll) {
     phones = phones.slice(0, 12);
-  }else{
-
+  } else {
   }
-  
+
   //console.log(phones);
   //for each marbo karon pottek ta ui te marbo
   phones.forEach((phone) => {
@@ -43,14 +42,46 @@ const displayPhones = (phones, isShowAll) => {
             <div class="card-body">
               <h2 class="card-title">${phone.phone_name}</h2>
               <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div class="card-actions justify-end">
-                <button class="btn btn-primary">Buy Now</button>
+              <div class="card-actions justify-center">
+                <button onclick="handleShowDetails('${phone.slug}')" class="btn btn-primary">Show Details</button>
               </div>
             </div>`;
     //   step 4 : Append Child
     phoneContainer.appendChild(phoneCard);
   });
   toggleLoadingSpinner(false);
+};
+
+//single phone
+const handleShowDetails = async (id) => {
+  //console.log("okay", id);
+  // load single phone data
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/phone/${id}`
+  );
+  const data = await res.json();
+  const phone = data.data;
+  //console.log(data);
+  showPhoneDetails(phone);
+};
+
+const showPhoneDetails = (phone) => {
+  console.log(phone);
+  const phoneName = document.getElementById("phone-name");
+  phoneName.innerText = phone.name;
+
+  const showDetailContainer = document.getElementById("show-detail-container");
+  showDetailContainer.innerHTML = `
+  <img  src="${phone.image}" alt="">
+  <p><span>brand: ${phone?.brand}</span></p>
+  <p><span>Storage: ${phone?.mainFeatures?.storage}</span></p>
+  <p><span>displaySize: ${phone?.mainFeatures?.displaySize}</span></p>
+  <p><span>chipSet: ${phone?.mainFeatures?.chipSet}</span></p>
+  <p><span>memory: ${phone?.mainFeatures?.memory}</span></p>
+  <p><span>releaseDate: ${phone?.releaseDate}</span></p>
+  <p><span>GPS: ${phone?.others?.GPS}</span></p>
+  `;
+  show_details_modal.showModal();
 };
 
 // Handle Search Button
@@ -82,8 +113,7 @@ const toggleLoadingSpinner = (isLoading) => {
 };
 
 //handle-show-all
-const handleShowAll = () =>{
+const handleShowAll = () => {
   handleSearch(true);
-
-}
-//loadPhone();
+};
+loadPhone();
