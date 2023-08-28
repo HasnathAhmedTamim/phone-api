@@ -67,7 +67,7 @@ const handleShowDetails = async (id) => {
 };
 
 const showPhoneDetails = (phone) => {
-  console.log(phone);
+  //console.log(phone);
   const phoneName = document.getElementById("phone-name");
   phoneName.innerText = phone.name;
 
