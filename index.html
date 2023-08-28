@@ -26,7 +26,7 @@
         />
         <button onclick="handleSearch()" class="btn btn-accent">Search</button>
         <!-- another field -->
-        <input
+        <!-- <input
           id="search-field2"
           type="text"
           placeholder="search..."
@@ -34,19 +34,26 @@
         />
         <button onclick="handleSearch2()" class="btn btn-primary">
           Search
-        </button>
+        </button> -->
       </section>
+      
+      
 
       <!-- search result -->
       <section>
+        <!-- spinner or loader -->
+        <div class="text-center my-20 hidden" id="loading-spinner">
+          <span class="loading loading-infinity loading-lg text-purple-900"></span>
+        </div>
+
         <div
           id="phone-container"
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
         ></div>
 
         <!-- show all button -->
-        <div id="show-all-container" class="hidden">
-          <button class="btn btn-accent">Show All</button>
+        <div id="show-all-container" class="hidden text-center my-20">
+          <button onclick="handleShowAll()" class="btn btn-accent">Show All</button>
         </div>
       </section>
     </main>
